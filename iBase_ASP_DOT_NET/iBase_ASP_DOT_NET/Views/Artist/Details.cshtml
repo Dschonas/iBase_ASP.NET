@@ -1,0 +1,66 @@
+﻿@model iBase_ASP_DOT_NET.Models.ArtistTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ArtistTable</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Href)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Href)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FollowersTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FollowersTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Popularity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Popularity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="iBaseModelStoreContainer" CdmEntityContainer="iBaseEntities">
+    <EntitySetMapping Name="AlbumHasArtists">
+      <EntityTypeMapping TypeName="iBaseModel.AlbumHasArtists">
+        <MappingFragment StoreEntitySet="AlbumHasArtists">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+          <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AlbumHasTracks">
+      <EntityTypeMapping TypeName="iBaseModel.AlbumHasTracks">
+        <MappingFragment StoreEntitySet="AlbumHasTracks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+          <ScalarProperty Name="TrackId" ColumnName="TrackId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AlbumTable">
+      <EntityTypeMapping TypeName="iBaseModel.AlbumTable">
+        <MappingFragment StoreEntitySet="AlbumTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Href" ColumnName="Href" />
+          <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArtistTable">
+      <EntityTypeMapping TypeName="iBaseModel.ArtistTable">
+        <MappingFragment StoreEntitySet="ArtistTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Href" ColumnName="Href" />
+          <ScalarProperty Name="Genre" ColumnName="Genre" />
+          <ScalarProperty Name="FollowersTotal" ColumnName="FollowersTotal" />
+          <ScalarProperty Name="Popularity" ColumnName="Popularity" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlaylistHasTracks">
+      <EntityTypeMapping TypeName="iBaseModel.PlaylistHasTracks">
+        <MappingFragment StoreEntitySet="PlaylistHasTracks">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TrackId" ColumnName="TrackId" />
+          <ScalarProperty Name="PlaylistId" ColumnName="PlaylistId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlaylistTable">
+      <EntityTypeMapping TypeName="iBaseModel.PlaylistTable">
+        <MappingFragment StoreEntitySet="PlaylistTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PlaylistHasTracks" ColumnName="PlaylistHasTracks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TrackHasArtists">
+      <EntityTypeMapping TypeName="iBaseModel.TrackHasArtists">
+        <MappingFragment StoreEntitySet="TrackHasArtists">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+          <ScalarProperty Name="TrackId" ColumnName="TrackId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TracksHasArtist">
+      <EntityTypeMapping TypeName="iBaseModel.TracksHasArtist">
+        <MappingFragment StoreEntitySet="TracksHasArtist">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+          <ScalarProperty Name="TrackId" ColumnName="TrackId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TrackTable">
+      <EntityTypeMapping TypeName="iBaseModel.TrackTable">
+        <MappingFragment StoreEntitySet="TrackTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Album" ColumnName="Album" />
+          <ScalarProperty Name="DiscNumber" ColumnName="DiscNumber" />
+          <ScalarProperty Name="DurationMS" ColumnName="DurationMS" />
+          <ScalarProperty Name="Explicity" ColumnName="Explicity" />
+          <ScalarProperty Name="Href" ColumnName="Href" />
+          <ScalarProperty Name="Popularity" ColumnName="Popularity" />
+          <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+          <ScalarProperty Name="PreviewURL" ColumnName="PreviewURL" />
+          <ScalarProperty Name="TrackNumber" ColumnName="TrackNumber" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTable">
+      <EntityTypeMapping TypeName="iBaseModel.UserTable">
+        <MappingFragment StoreEntitySet="UserTable">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

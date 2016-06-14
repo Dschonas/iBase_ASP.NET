@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="iBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AlbumHasArtists">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AlbumId" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ArtistId" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AlbumHasTracks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AlbumId" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="TrackId" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AlbumTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="1000" />
+    <Property Name="Href" Type="varchar" MaxLength="1000" />
+    <Property Name="ImageURL" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="ArtistTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="Href" Type="varchar" MaxLength="1000" />
+    <Property Name="Genre" Type="varchar" MaxLength="100" />
+    <Property Name="FollowersTotal" Type="bigint" />
+    <Property Name="Popularity" Type="bigint" />
+    <Property Name="Type" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="PlaylistHasTracks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TrackId" Type="varchar" MaxLength="100" />
+    <Property Name="PlaylistId" Type="int" />
+  </EntityType>
+  <EntityType Name="PlaylistTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PlaylistHasTracks" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TrackHasArtists">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ArtistId" Type="varchar" MaxLength="100" />
+    <Property Name="TrackId" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TracksHasArtist">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ArtistId" Type="varchar" MaxLength="100" />
+    <Property Name="TrackId" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TrackTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="500" />
+    <Property Name="Album" Type="varchar" MaxLength="500" />
+    <Property Name="DiscNumber" Type="int" />
+    <Property Name="DurationMS" Type="bigint" />
+    <Property Name="Explicity" Type="bit" />
+    <Property Name="Href" Type="varchar" MaxLength="500" />
+    <Property Name="Popularity" Type="bigint" />
+    <Property Name="ImageURL" Type="varchar" MaxLength="500" />
+    <Property Name="PreviewURL" Type="varchar" MaxLength="500" />
+    <Property Name="TrackNumber" Type="int" />
+    <Property Name="Type" Type="varchar" MaxLength="100" />
+    <Property Name="ArtistID" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="UserTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AlbumHasArtist_Album">
+    <End Role="AlbumTable" Type="Self.AlbumTable" Multiplicity="1" />
+    <End Role="AlbumHasArtists" Type="Self.AlbumHasArtists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AlbumTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AlbumHasArtists">
+        <PropertyRef Name="AlbumId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AlbumHasArtist_Artist">
+    <End Role="ArtistTable" Type="Self.ArtistTable" Multiplicity="1" />
+    <End Role="AlbumHasArtists" Type="Self.AlbumHasArtists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArtistTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AlbumHasArtists">
+        <PropertyRef Name="ArtistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AlbumHasTracks_Album">
+    <End Role="AlbumTable" Type="Self.AlbumTable" Multiplicity="1" />
+    <End Role="AlbumHasTracks" Type="Self.AlbumHasTracks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AlbumTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AlbumHasTracks">
+        <PropertyRef Name="AlbumId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AlbumHasTracks_Track">
+    <End Role="TrackTable" Type="Self.TrackTable" Multiplicity="1" />
+    <End Role="AlbumHasTracks" Type="Self.AlbumHasTracks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrackTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AlbumHasTracks">
+        <PropertyRef Name="TrackId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Artists">
+    <End Role="ArtistTable" Type="Self.ArtistTable" Multiplicity="0..1" />
+    <End Role="TrackTable" Type="Self.TrackTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArtistTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrackTable">
+        <PropertyRef Name="ArtistID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlaylistHasTracks">
+    <End Role="PlaylistHasTracks" Type="Self.PlaylistHasTracks" Multiplicity="1" />
+    <End Role="PlaylistTable" Type="Self.PlaylistTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlaylistHasTracks">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlaylistTable">
+        <PropertyRef Name="PlaylistHasTracks" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlaylistId">
+    <End Role="PlaylistTable" Type="Self.PlaylistTable" Multiplicity="0..1" />
+    <End Role="PlaylistHasTracks" Type="Self.PlaylistHasTracks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlaylistTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlaylistHasTracks">
+        <PropertyRef Name="PlaylistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrackHasArtist_Artist">
+    <End Role="ArtistTable" Type="Self.ArtistTable" Multiplicity="0..1" />
+    <End Role="TrackHasArtists" Type="Self.TrackHasArtists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArtistTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrackHasArtists">
+        <PropertyRef Name="ArtistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrackHasArtist_ArtistId">
+    <End Role="ArtistTable" Type="Self.ArtistTable" Multiplicity="0..1" />
+    <End Role="TracksHasArtist" Type="Self.TracksHasArtist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArtistTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TracksHasArtist">
+        <PropertyRef Name="ArtistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrackHasArtist_Track">
+    <End Role="TrackTable" Type="Self.TrackTable" Multiplicity="0..1" />
+    <End Role="TrackHasArtists" Type="Self.TrackHasArtists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrackTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrackHasArtists">
+        <PropertyRef Name="TrackId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrackHasArtist_TrackId">
+    <End Role="TrackTable" Type="Self.TrackTable" Multiplicity="0..1" />
+    <End Role="TracksHasArtist" Type="Self.TracksHasArtist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrackTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TracksHasArtist">
+        <PropertyRef Name="TrackId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrackId">
+    <End Role="TrackTable" Type="Self.TrackTable" Multiplicity="0..1" />
+    <End Role="PlaylistHasTracks" Type="Self.PlaylistHasTracks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrackTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlaylistHasTracks">
+        <PropertyRef Name="TrackId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserID">
+    <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+    <End Role="PlaylistTable" Type="Self.PlaylistTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlaylistTable">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="iBaseModelStoreContainer">
+    <EntitySet Name="AlbumHasArtists" EntityType="Self.AlbumHasArtists" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AlbumHasTracks" EntityType="Self.AlbumHasTracks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AlbumTable" EntityType="Self.AlbumTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtistTable" EntityType="Self.ArtistTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlaylistHasTracks" EntityType="Self.PlaylistHasTracks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlaylistTable" EntityType="Self.PlaylistTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TrackHasArtists" EntityType="Self.TrackHasArtists" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TracksHasArtist" EntityType="Self.TracksHasArtist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TrackTable" EntityType="Self.TrackTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserTable" EntityType="Self.UserTable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AlbumHasArtist_Album" Association="Self.FK_AlbumHasArtist_Album">
+      <End Role="AlbumTable" EntitySet="AlbumTable" />
+      <End Role="AlbumHasArtists" EntitySet="AlbumHasArtists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AlbumHasArtist_Artist" Association="Self.FK_AlbumHasArtist_Artist">
+      <End Role="ArtistTable" EntitySet="ArtistTable" />
+      <End Role="AlbumHasArtists" EntitySet="AlbumHasArtists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AlbumHasTracks_Album" Association="Self.FK_AlbumHasTracks_Album">
+      <End Role="AlbumTable" EntitySet="AlbumTable" />
+      <End Role="AlbumHasTracks" EntitySet="AlbumHasTracks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AlbumHasTracks_Track" Association="Self.FK_AlbumHasTracks_Track">
+      <End Role="TrackTable" EntitySet="TrackTable" />
+      <End Role="AlbumHasTracks" EntitySet="AlbumHasTracks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Artists" Association="Self.FK_Artists">
+      <End Role="ArtistTable" EntitySet="ArtistTable" />
+      <End Role="TrackTable" EntitySet="TrackTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlaylistHasTracks" Association="Self.FK_PlaylistHasTracks">
+      <End Role="PlaylistHasTracks" EntitySet="PlaylistHasTracks" />
+      <End Role="PlaylistTable" EntitySet="PlaylistTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlaylistId" Association="Self.FK_PlaylistId">
+      <End Role="PlaylistTable" EntitySet="PlaylistTable" />
+      <End Role="PlaylistHasTracks" EntitySet="PlaylistHasTracks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrackHasArtist_Artist" Association="Self.FK_TrackHasArtist_Artist">
+      <End Role="ArtistTable" EntitySet="ArtistTable" />
+      <End Role="TrackHasArtists" EntitySet="TrackHasArtists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrackHasArtist_ArtistId" Association="Self.FK_TrackHasArtist_ArtistId">
+      <End Role="ArtistTable" EntitySet="ArtistTable" />
+      <End Role="TracksHasArtist" EntitySet="TracksHasArtist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrackHasArtist_Track" Association="Self.FK_TrackHasArtist_Track">
+      <End Role="TrackTable" EntitySet="TrackTable" />
+      <End Role="TrackHasArtists" EntitySet="TrackHasArtists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrackHasArtist_TrackId" Association="Self.FK_TrackHasArtist_TrackId">
+      <End Role="TrackTable" EntitySet="TrackTable" />
+      <End Role="TracksHasArtist" EntitySet="TracksHasArtist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrackId" Association="Self.FK_TrackId">
+      <End Role="TrackTable" EntitySet="TrackTable" />
+      <End Role="PlaylistHasTracks" EntitySet="PlaylistHasTracks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserID" Association="Self.FK_UserID">
+      <End Role="UserTable" EntitySet="UserTable" />
+      <End Role="PlaylistTable" EntitySet="PlaylistTable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
