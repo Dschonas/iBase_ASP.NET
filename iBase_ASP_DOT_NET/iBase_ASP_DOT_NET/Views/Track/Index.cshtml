@@ -1,21 +1,22 @@
-﻿@model IEnumerable<iBase_ASP_DOT_NET.Models.TrackTable>
+﻿@model PagedList.IPagedList<iBase_ASP_DOT_NET.Models.TrackTable>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tracks";
 }
 
-<h2>Index</h2>
+<h2>Tracks</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("Index", "Track", FormMethod.Get)) {
 
     <div class="form-horizontal">
-        popularity
-        <input name="popularity" type="number" />
-        <input name="suchname" type="text" />
+        Popularity: <input name="popularity" type="number" />
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" class="btn btn-default" />
     </div>
 }
@@ -23,43 +24,47 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Id)
+            ID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.ActionLink("Name", "Index",
+                new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter }) 
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Album)
+            Album
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DiscNumber)
+            DiscNumber
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DurationMS)
+            Duration in MS
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Explicity)
+            Explicity
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Href)
+            Href
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Popularity)
+            @Html.ActionLink("Popularity", "Index",
+                new { sortOrder = ViewBag.PopularitySortParm, currentFilter = ViewBag.CurrentFilter }) 
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImageURL)
+            Image URL
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PreviewURL)
+            Preview URL
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TrackNumber)
+            @Html.ActionLink("Number", "Index",
+                new { sortOrder = ViewBag.NumberSortParm, currentFilter = ViewBag.CurrentFilter }) 
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.ActionLink("Type", "Index",
+                new { sortOrder = ViewBag.TypeSortParm, currentFilter = ViewBag.CurrentFilter }) 
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ArtistTable.Name)
+            Artist Name
         </th>
         <th></th>
     </tr>
@@ -114,3 +119,11 @@
 }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new {
+        page,
+        sortOrder = ViewBag.CurrentSort,
+        currentFilter = ViewBag.CurrentFilter
+    }))

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using iBase_ASP_DOT_NET.Models;
+using PagedList;
 
 namespace iBase_ASP_DOT_NET.Controllers
 {
@@ -15,14 +16,51 @@ namespace iBase_ASP_DOT_NET.Controllers
         private iBaseEntities db = new iBaseEntities();
 
         // GET: Artist
-        public ActionResult Index(string suchname)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var artists = db.ArtistTable.ToList();
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.GenreSortParm = sortOrder == "Genre" ? "genre_desc" : "Genre";
+            ViewBag.TypeSortParm = sortOrder == "Type" ? "type_desc" : "Type";
+            ViewBag.PopularitySortParm = sortOrder == "Popularity" ? "popularity_desc" : "Popularity";
 
-            if (!string.IsNullOrEmpty(suchname))
-                artists = artists.Where(at => at.Name.Contains(suchname)).ToList();
-            
-            return View(artists);
+            if (searchString != null) {
+                page = 1;
+            }
+            else {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var artists = from a in db.ArtistTable
+                          select a;
+
+            if (!string.IsNullOrEmpty(searchString))
+                artists = artists.Where(at => at.Name.Contains(searchString));
+
+            switch (sortOrder) {
+                case "name_desc":
+                    artists = artists.OrderByDescending(a => a.Name);
+                    break;
+                case "genre_desc":
+                    artists = artists.OrderByDescending(a => a.Genre);
+                    break;
+                case "type_desc":
+                    artists = artists.OrderByDescending(a => a.Type);
+                    break;
+                case "popularity_desc":
+                    artists = artists.OrderByDescending(a => a.Popularity);
+                    break;
+                default:
+                    artists = artists.OrderBy(a => a.Name);
+                    break;
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(artists.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Artist/Details/5

@@ -50,7 +50,7 @@ namespace iBase_ASP_DOT_NET.Controllers
                     break;
             }
 
-            int pageSize = 3;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
 
             return View(albums.ToPagedList(pageNumber, pageSize));
