@@ -21,9 +21,9 @@ namespace iBase_ASP_DOT_NET.Models
         }
     
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public Nullable<int> UserId { get; set; }
         public string Name { get; set; }
-        public int PlaylistHasTracks { get; set; }
+        public Nullable<int> PlaylistHasTracks { get; set; }
     
         public virtual PlaylistHasTracks PlaylistHasTracks1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

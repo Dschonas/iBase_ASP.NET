@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Jonas\Dropbox\Misc\Programming\Git\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\Models\iBase.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Stefan\Documents\GitHub\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\Models\iBase.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

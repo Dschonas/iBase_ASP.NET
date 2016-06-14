@@ -9,17 +9,17 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AlbumId" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="ArtistId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="AlbumId" Type="varchar" MaxLength="100" />
+          <Property Name="ArtistId" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="AlbumHasTracks">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AlbumId" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="TrackId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="AlbumId" Type="varchar" MaxLength="100" />
+          <Property Name="TrackId" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="AlbumTable">
           <Key>
@@ -46,7 +46,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="TrackId" Type="varchar" MaxLength="100" />
           <Property Name="PlaylistId" Type="int" />
         </EntityType>
@@ -54,16 +54,16 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PlaylistHasTracks" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="PlaylistHasTracks" Type="int" />
         </EntityType>
         <EntityType Name="TrackHasArtists">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="ArtistId" Type="varchar" MaxLength="100" />
           <Property Name="TrackId" Type="varchar" MaxLength="100" />
         </EntityType>
@@ -71,7 +71,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="ArtistId" Type="varchar" MaxLength="100" />
           <Property Name="TrackId" Type="varchar" MaxLength="100" />
         </EntityType>
@@ -97,12 +97,12 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_AlbumHasArtist_Album">
-          <End Role="AlbumTable" Type="Self.AlbumTable" Multiplicity="1" />
+          <End Role="AlbumTable" Type="Self.AlbumTable" Multiplicity="0..1" />
           <End Role="AlbumHasArtists" Type="Self.AlbumHasArtists" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AlbumTable">
@@ -114,7 +114,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AlbumHasArtist_Artist">
-          <End Role="ArtistTable" Type="Self.ArtistTable" Multiplicity="1" />
+          <End Role="ArtistTable" Type="Self.ArtistTable" Multiplicity="0..1" />
           <End Role="AlbumHasArtists" Type="Self.AlbumHasArtists" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ArtistTable">
@@ -126,7 +126,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AlbumHasTracks_Album">
-          <End Role="AlbumTable" Type="Self.AlbumTable" Multiplicity="1" />
+          <End Role="AlbumTable" Type="Self.AlbumTable" Multiplicity="0..1" />
           <End Role="AlbumHasTracks" Type="Self.AlbumHasTracks" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AlbumTable">
@@ -138,7 +138,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AlbumHasTracks_Track">
-          <End Role="TrackTable" Type="Self.TrackTable" Multiplicity="1" />
+          <End Role="TrackTable" Type="Self.TrackTable" Multiplicity="0..1" />
           <End Role="AlbumHasTracks" Type="Self.AlbumHasTracks" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TrackTable">
@@ -162,7 +162,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PlaylistHasTracks">
-          <End Role="PlaylistHasTracks" Type="Self.PlaylistHasTracks" Multiplicity="1" />
+          <End Role="PlaylistHasTracks" Type="Self.PlaylistHasTracks" Multiplicity="0..1" />
           <End Role="PlaylistTable" Type="Self.PlaylistTable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PlaylistHasTracks">
@@ -246,7 +246,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserID">
-          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
           <End Role="PlaylistTable" Type="Self.PlaylistTable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserTable">
@@ -330,9 +330,9 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AlbumId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ArtistId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="AlbumId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ArtistId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AlbumTable" Relationship="Self.FK_AlbumHasArtist_Album" FromRole="AlbumHasArtists" ToRole="AlbumTable" />
           <NavigationProperty Name="ArtistTable" Relationship="Self.FK_AlbumHasArtist_Artist" FromRole="AlbumHasArtists" ToRole="ArtistTable" />
         </EntityType>
@@ -340,9 +340,9 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AlbumId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TrackId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="AlbumId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TrackId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AlbumTable" Relationship="Self.FK_AlbumHasTracks_Album" FromRole="AlbumHasTracks" ToRole="AlbumTable" />
           <NavigationProperty Name="TrackTable" Relationship="Self.FK_AlbumHasTracks_Track" FromRole="AlbumHasTracks" ToRole="TrackTable" />
         </EntityType>
@@ -377,7 +377,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="TrackId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PlaylistId" Type="Int32" />
           <NavigationProperty Name="PlaylistTable" Relationship="Self.FK_PlaylistHasTracks" FromRole="PlaylistHasTracks" ToRole="PlaylistTable" />
@@ -388,10 +388,10 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PlaylistHasTracks" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlaylistHasTracks" Type="Int32" />
           <NavigationProperty Name="PlaylistHasTracks1" Relationship="Self.FK_PlaylistHasTracks" FromRole="PlaylistTable" ToRole="PlaylistHasTracks" />
           <NavigationProperty Name="PlaylistHasTracks2" Relationship="Self.FK_PlaylistId" FromRole="PlaylistTable" ToRole="PlaylistHasTracks" />
           <NavigationProperty Name="UserTable" Relationship="Self.FK_UserID" FromRole="PlaylistTable" ToRole="UserTable" />
@@ -400,7 +400,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="ArtistId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="TrackId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ArtistTable" Relationship="Self.FK_TrackHasArtist_Artist" FromRole="TrackHasArtists" ToRole="ArtistTable" />
@@ -410,7 +410,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="ArtistId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="TrackId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ArtistTable" Relationship="Self.FK_TrackHasArtist_ArtistId" FromRole="TracksHasArtist" ToRole="ArtistTable" />
@@ -443,13 +443,13 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PlaylistTable" Relationship="Self.FK_UserID" FromRole="UserTable" ToRole="PlaylistTable" />
         </EntityType>
         <Association Name="FK_AlbumHasArtist_Album">
-          <End Role="AlbumTable" Type="Self.AlbumTable" Multiplicity="1" />
+          <End Role="AlbumTable" Type="Self.AlbumTable" Multiplicity="0..1" />
           <End Role="AlbumHasArtists" Type="Self.AlbumHasArtists" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AlbumTable">
@@ -461,7 +461,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AlbumHasArtist_Artist">
-          <End Role="ArtistTable" Type="Self.ArtistTable" Multiplicity="1" />
+          <End Role="ArtistTable" Type="Self.ArtistTable" Multiplicity="0..1" />
           <End Role="AlbumHasArtists" Type="Self.AlbumHasArtists" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ArtistTable">
@@ -473,7 +473,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AlbumHasTracks_Album">
-          <End Role="AlbumTable" Type="Self.AlbumTable" Multiplicity="1" />
+          <End Role="AlbumTable" Type="Self.AlbumTable" Multiplicity="0..1" />
           <End Role="AlbumHasTracks" Type="Self.AlbumHasTracks" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AlbumTable">
@@ -485,7 +485,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AlbumHasTracks_Track">
-          <End Role="TrackTable" Type="Self.TrackTable" Multiplicity="1" />
+          <End Role="TrackTable" Type="Self.TrackTable" Multiplicity="0..1" />
           <End Role="AlbumHasTracks" Type="Self.AlbumHasTracks" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TrackTable">
@@ -533,7 +533,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PlaylistHasTracks">
-          <End Role="PlaylistHasTracks" Type="Self.PlaylistHasTracks" Multiplicity="1" />
+          <End Role="PlaylistHasTracks" Type="Self.PlaylistHasTracks" Multiplicity="0..1" />
           <End Role="PlaylistTable" Type="Self.PlaylistTable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PlaylistHasTracks">
@@ -569,7 +569,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserID">
-          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
           <End Role="PlaylistTable" Type="Self.PlaylistTable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserTable">
