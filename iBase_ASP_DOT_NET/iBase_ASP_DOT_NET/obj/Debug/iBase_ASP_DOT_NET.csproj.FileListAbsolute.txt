@@ -112,3 +112,7 @@ C:\Users\Stefan\Documents\GitHub\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_N
 C:\Users\Stefan\Documents\GitHub\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\obj\Debug\iBase_ASP_DOT_NET.csprojResolveAssemblyReference.cache
 C:\Users\Stefan\Documents\GitHub\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\obj\Debug\iBase_ASP_DOT_NET.dll
 C:\Users\Stefan\Documents\GitHub\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\obj\Debug\iBase_ASP_DOT_NET.pdb
+C:\Users\Jonas\Dropbox\Misc\Programming\Git\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\bin\PagedList.dll
+C:\Users\Jonas\Dropbox\Misc\Programming\Git\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\bin\PagedList.Mvc.dll
+C:\Users\Jonas\Dropbox\Misc\Programming\Git\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\bin\PagedList.xml
+C:\Users\Jonas\Dropbox\Misc\Programming\Git\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\bin\PagedList.Mvc.xml
