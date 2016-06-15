@@ -11,7 +11,7 @@
 }
 
 .jumbotron {
-    background-color: darkslategrey;
+    background-color: rbga(255,255,255,0.5);
     border: 0px !important;
     border-radius: 0px !important;
 }
