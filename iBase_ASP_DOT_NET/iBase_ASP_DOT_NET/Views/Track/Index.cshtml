@@ -6,124 +6,81 @@
     ViewBag.Title = "Tracks";
 }
 
-<h2>Tracks</h2>
+<h2>Tracks
+    <a style="float: right" href="Track/Create" class="btn btn-secondary" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-@using (Html.BeginForm("Index", "Track", FormMethod.Get)) {
-
-    <div class="form-horizontal">
-        Popularity: <input name="popularity" type="number" />
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Search" class="btn btn-default" />
+@using (Html.BeginForm("Index", "Track", FormMethod.Get))
+{
+    <div class="filterbox">
+        <input name="popularity" type="number" placeholder="Popularity" style="float: left;" />
+        <div class="form-horizontal">
+            <div class="input-group">
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Search by name ..." })
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-secondary" value="Search" />
+                </span>
+            </div>
+        </div>
+    </div>
+}
+@foreach (var item in Model)
+{
+    <div class="col-sm-6 col-md-4 col-xs-6">
+        <div class="thumbnail thumbnail-index">
+            <img class="albumart" src="http://www.designformusic.com/wp-content/uploads/2015/10/insurgency-digital-album-cover-design.jpg" alt="@Html.DisplayFor(modelItem => item.ImageURL)">
+            <audio controls class="controls">
+                <source src="@Html.DisplayFor(modelItem => item.PreviewURL)" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+            <div class="caption">
+                <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+                <p>
+                    <span class="flexed">
+                        <b>Album:</b> @Html.DisplayFor(modelItem => item.Album)
+                        <span class="text-right">
+                            Disc @Html.DisplayFor(modelItem => item.DiscNumber)/
+                            <span class="glyphicon glyphicon-music" aria-hidden="true"></span>@Html.DisplayFor(modelItem => item.TrackNumber)
+                        </span>
+                    </span>
+                </p>
+                <p>
+                    <span class="flexed">
+                        <b>Duration:</b> @Html.DisplayFor(modelItem => item.DurationMS)
+                        <span class="text-right">Explicity @Html.DisplayFor(modelItem => item.Explicity)</span>
+                    </span>
+                </p>
+                <p>
+                    <span class="flexed">
+                        <b>Popularity:</b> @Html.DisplayFor(modelItem => item.Popularity)%
+                        <span class="text-right">Link: <a class="tracklink glyphicon glyphicon-new-window" aria-hidden="true" href="@Html.DisplayFor(modelItem => item.Href)"></a></span>
+                    </span>
+                </p>
+                <p><b>Type:</b> @Html.DisplayFor(modelItem => item.Type)</p>
+                <p><b>Artist:</b> @Html.DisplayFor(modelItem => item.ArtistTable.Name)</p>
+                <div class="edit" style="text-align: center">
+                    <div style="display: inline-block;">
+                        <span class="btn-left glyphicon glyphicon-pencil" aria-hidden="true"></span>@Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        <span class="btn-right glyphicon glyphicon-info-sign" aria-hidden="true"></span>@Html.ActionLink("Details", "Details", new { id = item.Id })
+                        <span class="btn-right glyphicon glyphicon-remove" aria-hidden="true"></span>@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 }
 
-<table class="table">
-    <tr>
-        <th>
-            ID
-        </th>
-        <th>
-            @Html.ActionLink("Name", "Index",
-                new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter }) 
-        </th>
-        <th>
-            Album
-        </th>
-        <th>
-            DiscNumber
-        </th>
-        <th>
-            Duration in MS
-        </th>
-        <th>
-            Explicity
-        </th>
-        <th>
-            Href
-        </th>
-        <th>
-            @Html.ActionLink("Popularity", "Index",
-                new { sortOrder = ViewBag.PopularitySortParm, currentFilter = ViewBag.CurrentFilter }) 
-        </th>
-        <th>
-            Image URL
-        </th>
-        <th>
-            Preview URL
-        </th>
-        <th>
-            @Html.ActionLink("Number", "Index",
-                new { sortOrder = ViewBag.NumberSortParm, currentFilter = ViewBag.CurrentFilter }) 
-        </th>
-        <th>
-            @Html.ActionLink("Type", "Index",
-                new { sortOrder = ViewBag.TypeSortParm, currentFilter = ViewBag.CurrentFilter }) 
-        </th>
-        <th>
-            Artist Name
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <th>
-            @Html.DisplayFor(model => item.Id)
-        </th>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Album)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiscNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DurationMS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Explicity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Href)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Popularity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageURL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PreviewURL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TrackNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ArtistTable.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
-<br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("Index",
-    new {
+<div class="row" style="clear:left">
+    <div class="col-md-6 col-sm-6 col-xs-6">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+    new
+    {
         page,
         sortOrder = ViewBag.CurrentSort,
         currentFilter = ViewBag.CurrentFilter
     }))
+
+    </div>
+
+</div>

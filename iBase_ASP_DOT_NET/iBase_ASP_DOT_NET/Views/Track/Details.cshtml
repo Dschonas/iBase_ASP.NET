@@ -4,111 +4,44 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>TrackTable</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Album)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Album)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DiscNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DiscNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DurationMS)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DurationMS)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Explicity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Explicity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Href)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Href)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Popularity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Popularity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageURL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageURL)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PreviewURL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PreviewURL)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TrackNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TrackNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ArtistTable.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ArtistTable.Name)
-        </dd>
-
-    </dl>
+<h2>Details for: @Html.DisplayFor(model => model.Name)</h2>
+<div class="col-sm-6 col-md-6 col-xs-12">
+    <div class="thumbnail thumbnail-details">
+        <audio controls class="controls">
+            <source src="@Html.DisplayFor(model => model.PreviewURL)" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="caption">
+            <h4>@Html.DisplayFor(model => model.Name)</h4>
+            <p>
+                <span class="flexed">
+                    <b>Album:</b> @Html.DisplayFor(model => model.Album)
+                    <span class="text-right">
+                        Disc @Html.DisplayFor(model => model.DiscNumber)/
+                        <span class="glyphicon glyphicon-music" aria-hidden="true"></span>@Html.DisplayFor(model => model.TrackNumber)
+                    </span>
+                </span>
+            </p>
+            <p>
+                <span class="flexed">
+                    <b>Duration:</b> @Html.DisplayFor(model => model.DurationMS)
+                    <span class="text-right">Explicity @Html.DisplayFor(model => model.Explicity)</span>
+                </span>
+            </p>
+            <p>
+                <span class="flexed">
+                    <b>Popularity:</b> @Html.DisplayFor(model => model.Popularity)%
+                    <span class="text-right">Link: <a class="tracklink glyphicon glyphicon-new-window" aria-hidden="true" href="@Html.DisplayFor(model => model.Href)"></a></span>
+                </span>
+            </p>
+            <p><b>Type:</b> @Html.DisplayFor(model => model.Type)</p>
+            <p><b>Artist:</b> @Html.DisplayFor(model => model.ArtistTable.Name)</p>
+        </div>
+    </div>
 </div>
+<img class="albumart2" src="http://www.designformusic.com/wp-content/uploads/2015/10/insurgency-digital-album-cover-design.jpg" alt="@Html.DisplayFor(model => model.ImageURL)">
 <p>
+    <br /><br />
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

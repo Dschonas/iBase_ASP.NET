@@ -116,3 +116,7 @@ C:\Users\Jonas\Dropbox\Misc\Programming\Git\iBase_ASP.NET\iBase_ASP_DOT_NET\iBas
 C:\Users\Jonas\Dropbox\Misc\Programming\Git\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\bin\PagedList.Mvc.dll
 C:\Users\Jonas\Dropbox\Misc\Programming\Git\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\bin\PagedList.xml
 C:\Users\Jonas\Dropbox\Misc\Programming\Git\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\bin\PagedList.Mvc.xml
+C:\Users\Stefan\Documents\GitHub\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\bin\PagedList.dll
+C:\Users\Stefan\Documents\GitHub\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\bin\PagedList.Mvc.dll
+C:\Users\Stefan\Documents\GitHub\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\bin\PagedList.xml
+C:\Users\Stefan\Documents\GitHub\iBase_ASP.NET\iBase_ASP_DOT_NET\iBase_ASP_DOT_NET\bin\PagedList.Mvc.xml
