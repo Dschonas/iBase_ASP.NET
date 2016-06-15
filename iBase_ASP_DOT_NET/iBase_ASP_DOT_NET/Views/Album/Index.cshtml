@@ -1,39 +1,43 @@
-﻿@model IEnumerable<iBase_ASP_DOT_NET.Models.AlbumTable>
+﻿@model PagedList.IPagedList<iBase_ASP_DOT_NET.Models.AlbumTable>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Albums";
 }
 
-<h2>Index</h2>
+<h2>Albums</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("Index", "Album", FormMethod.Get)) {
 
-    <div class="form-horizontal">
-        <input name="suchname" type="text" />
-        <input type="submit" value="Search" class="btn btn-default" />
-    </div>
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
 }
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.ActionLink("ID", "Index",
+               new { sortOrder = ViewBag.IDSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.ActionLink("Name", "Index",
+               new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Href)
+            Href
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImageURL)
+            Image URL
         </th>
         <th></th>
-    </tr>
+    </tr> 
 
 @foreach (var item in Model) {
     <tr>
@@ -58,3 +62,10 @@
 }
 
 </table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new {
+        page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter
+    }))

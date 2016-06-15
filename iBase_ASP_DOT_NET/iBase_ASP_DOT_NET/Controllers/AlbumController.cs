@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using iBase_ASP_DOT_NET.Models;
+using PagedList;
 
 namespace iBase_ASP_DOT_NET.Controllers
 {
@@ -15,14 +16,44 @@ namespace iBase_ASP_DOT_NET.Controllers
         private iBaseEntities db = new iBaseEntities();
 
         // GET: Album
-        public ActionResult Index(int? popularity, string suchname)
+        public ActionResult Index(string sortOrder, int? popularity, string searchString,
+                                    string currentFilter, int? page)
         {
-            var albums = db.AlbumTable.Include(a => a.AlbumHasArtists);
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "ID" ? "id_desc" : "ID";
 
-            if (!string.IsNullOrEmpty(suchname))
-                albums = albums.Where(at => at.Name.Contains(suchname));
+            if (searchString != null) {
+                page = 1;
+            }
+            else {
+                searchString = currentFilter;
+            }
 
-            return View(albums);
+            ViewBag.CurrentFilter = searchString;
+
+            var albums = from alb in db.AlbumTable
+                         select alb;
+
+            if (!String.IsNullOrEmpty(searchString))
+                albums = albums.Where(a => a.Name.Contains(searchString));
+
+            switch (sortOrder) {
+                case "name_desc":
+                    albums = albums.OrderByDescending(a => a.Name);
+                    break;
+                case "id_desc":
+                    albums = albums.OrderByDescending(a => a.Id);
+                    break;
+                default:
+                    albums = albums.OrderBy(a => a.Name);
+                    break;
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(albums.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Album/Details/5

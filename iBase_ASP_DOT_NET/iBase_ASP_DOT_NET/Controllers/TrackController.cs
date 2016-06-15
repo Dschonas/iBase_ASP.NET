@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using iBase_ASP_DOT_NET.Models;
+using PagedList;
 
 namespace iBase_ASP_DOT_NET.Controllers
 {
@@ -15,17 +16,48 @@ namespace iBase_ASP_DOT_NET.Controllers
         private iBaseEntities db = new iBaseEntities();
 
         // GET: Track
-        public ActionResult Index(int? popularity, string suchname)
+        public ActionResult Index(int? popularity, string searchString, string sortOrder,
+                                    int? page)
         {
-            var trackTables = db.TrackTable.Include(t => t.ArtistTable);
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.NumberSortParm = sortOrder == "Number" ? "number_desc" : "Number";
+            ViewBag.TypeSortParm = sortOrder == "Type" ? "type_desc" : "Type";
+            ViewBag.PopularitySortParm = sortOrder == "Popularity" ? "popularity_desc" : "Popularity";
+
+            var tracks = from t in db.TrackTable
+                         select t;
 
             if (popularity != null)
-                trackTables = trackTables.Where(tt => tt.Popularity >= popularity);
+                tracks = tracks.Where(tt => tt.Popularity >= popularity);
 
-            if (!string.IsNullOrEmpty(suchname))
-                trackTables = trackTables.Where(tt => tt.Name.Contains(suchname));
+            if (!string.IsNullOrEmpty(searchString))
+                tracks = tracks.Where(tt => tt.Name.Contains(searchString));
 
-            return View(trackTables.ToList());
+            ViewBag.CurrentFilter = searchString;
+
+            switch (sortOrder) {
+                case "name_desc":
+                    tracks = tracks.OrderByDescending(a => a.Name);
+                    break;
+                case "number_desc":
+                    tracks = tracks.OrderByDescending(a => a.TrackNumber);
+                    break;
+                case "type_desc":
+                    tracks = tracks.OrderByDescending(a => a.Type);
+                    break;
+                case "popularity_desc":
+                    tracks = tracks.OrderByDescending(a => a.Popularity);
+                    break;
+                default:
+                    tracks = tracks.OrderBy(a => a.Name);
+                    break;
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(tracks.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Track/Details/5
