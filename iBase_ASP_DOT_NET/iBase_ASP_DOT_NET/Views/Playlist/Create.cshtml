@@ -6,10 +6,10 @@
 
 <h2>Create a new Playlist</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal" style="margin-top: 2em;">
         <div class="form-group">
             @Html.LabelFor(model => model.UserId, "User", htmlAttributes: new { @class = "control-label col-md-2" })

@@ -9,7 +9,7 @@
 @using (Html.BeginForm("Index", "Track", FormMethod.Get))
 {
     <div class="filterbox">
-        <input name="popularity" type="number" placeholder="Popularity bigger than" style="float: left" class="btn btn-default"/>
+        <input name="popularity" type="number" placeholder="Popularity bigger than" style="float: left" class="btn btn-default" />
         <div class="form-horizontal">
             <div class="input-group">
                 @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Search by name ..." })
