@@ -55,7 +55,7 @@ namespace iBase_ASP_DOT_NET.Controllers
                     break;
             }
 
-            int pageSize = 10;
+            int pageSize = 9;
             int pageNumber = (page ?? 1);
 
             ViewBag.playlist = new SelectList(db.PlaylistTable, "Id", "Name");
