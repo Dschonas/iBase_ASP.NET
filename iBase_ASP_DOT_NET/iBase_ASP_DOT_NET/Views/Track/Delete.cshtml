@@ -3,13 +3,8 @@
 @{
     ViewBag.Title = "Delete";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to delete the track @Html.DisplayFor(model => model.Name)?</h3>
 <div>
-    <h4>TrackTable</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -64,15 +59,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Popularity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageURL)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageURL)
+            @Html.DisplayFor(model => model.Popularity)%
         </dd>
 
         <dt>
@@ -99,22 +86,22 @@
             @Html.DisplayFor(model => model.Type)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ArtistTable.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ArtistTable.Name)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="form-actions">
+            <div class="col-md-offset-6 col-md-6">
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default">@Html.ActionLink("Cancel", "Index")</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="submit" class="btn btn-default">Delete</button>
+                    </div>
+                </div>
+            </div>
         </div>
     }
 </div>

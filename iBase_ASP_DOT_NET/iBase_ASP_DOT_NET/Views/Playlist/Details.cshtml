@@ -4,11 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Details for @Html.DisplayFor(model => model.Name)</h2>
 
 <div>
-    <h4>PlaylistTable</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -28,7 +26,14 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="col-md-offset-6 col-md-6">
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default">@Html.ActionLink("Cancel", "Index")</button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="submit" class="btn btn-default">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</button>
+        </div>
+    </div>
+</div>

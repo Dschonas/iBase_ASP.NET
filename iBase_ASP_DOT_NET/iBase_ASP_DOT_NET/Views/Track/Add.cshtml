@@ -2,17 +2,17 @@
 @{
     ViewBag.Title = "Add";
 }
-<h2>Add</h2>
-<h3>Are you sure you want to add this?</h3>
+<h3>Add @Html.DisplayFor(model => model.Name) to Playlist</h3>
+
 @using (Html.BeginForm())
 {
-<div class="form-group">
-    <div class="col-md-10">
+<div class="form-group" style="margin: 2    em 0em;">
+    <h4 class="col-md-3">Please choose the Playlist:</h4>
+    <div class="col-md-3">
         @Html.DropDownList("playlist", null, htmlAttributes: new { @class = "form-control" })
     </div>
 </div>
-    <h4>TrackTable</h4>
-    <hr />
+    <br />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -88,9 +88,16 @@
         </dd>
     </dl>
         @Html.AntiForgeryToken()
-        <div class="form-actions no-color">
-            <input type="submit" value="Add" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="form-group">
+            <div class="col-md-offset-6 col-md-6">
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default">@Html.ActionLink("Cancel", "Index")</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="submit" class="btn btn-default">Add</button>
+                    </div>
+                </div>
+            </div>
         </div>
-
     }
