@@ -15,31 +15,28 @@ namespace iBase_ASP_DOT_NET.Controllers
         private iBaseEntities db = new iBaseEntities();
 
         // GET: Playlist
-        public ActionResult Index()
+        public ActionResult Index ()
         {
-            var playlistTables = db.PlaylistTable.Include(p => p.PlaylistHasTracks).Include(p => p.UserTable);
-            return View(playlistTables.ToList());
+            var playlists = db.PlaylistTable.Include(p => p.UserTable);
+            return View(playlists.ToList());
         }
 
         // GET: Playlist/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details (int? id)
         {
-            if (id == null)
-            {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PlaylistTable playlistTable = db.PlaylistTable.Find(id);
-            if (playlistTable == null)
-            {
+            if (playlistTable == null) {
                 return HttpNotFound();
             }
             return View(playlistTable);
         }
 
         // GET: Playlist/Create
-        public ActionResult Create()
+        public ActionResult Create ()
         {
-            ViewBag.PlaylistHasTracks = new SelectList(db.PlaylistHasTracks, "Id", "TrackId");
             ViewBag.UserId = new SelectList(db.UserTable, "Id", "Username");
             return View();
         }
@@ -49,33 +46,28 @@ namespace iBase_ASP_DOT_NET.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId,Name,PlaylistHasTracks")] PlaylistTable playlistTable)
+        public ActionResult Create ([Bind(Include = "Id,UserId,Name")] PlaylistTable playlistTable)
         {
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
                 db.PlaylistTable.Add(playlistTable);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PlaylistHasTracks = new SelectList(db.PlaylistHasTracks, "Id", "TrackId", playlistTable.PlaylistHasTracks);
             ViewBag.UserId = new SelectList(db.UserTable, "Id", "Username", playlistTable.UserId);
             return View(playlistTable);
         }
 
         // GET: Playlist/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit (int? id)
         {
-            if (id == null)
-            {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PlaylistTable playlistTable = db.PlaylistTable.Find(id);
-            if (playlistTable == null)
-            {
+            if (playlistTable == null) {
                 return HttpNotFound();
             }
-            ViewBag.PlaylistHasTracks = new SelectList(db.PlaylistHasTracks, "Id", "TrackId", playlistTable.PlaylistHasTracks);
             ViewBag.UserId = new SelectList(db.UserTable, "Id", "Username", playlistTable.UserId);
             return View(playlistTable);
         }
@@ -85,29 +77,25 @@ namespace iBase_ASP_DOT_NET.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,Name,PlaylistHasTracks")] PlaylistTable playlistTable)
+        public ActionResult Edit ([Bind(Include = "Id,UserId,Name")] PlaylistTable playlistTable)
         {
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
                 db.Entry(playlistTable).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PlaylistHasTracks = new SelectList(db.PlaylistHasTracks, "Id", "TrackId", playlistTable.PlaylistHasTracks);
             ViewBag.UserId = new SelectList(db.UserTable, "Id", "Username", playlistTable.UserId);
             return View(playlistTable);
         }
 
         // GET: Playlist/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete (int? id)
         {
-            if (id == null)
-            {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             PlaylistTable playlistTable = db.PlaylistTable.Find(id);
-            if (playlistTable == null)
-            {
+            if (playlistTable == null) {
                 return HttpNotFound();
             }
             return View(playlistTable);
@@ -116,18 +104,23 @@ namespace iBase_ASP_DOT_NET.Controllers
         // POST: Playlist/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed (int id)
         {
             PlaylistTable playlistTable = db.PlaylistTable.Find(id);
             db.PlaylistTable.Remove(playlistTable);
+
+            var phtremove = db.PlaylistHasTracks.Where(p => p.PlaylistId == id).ToList();
+            foreach (var item in phtremove) {
+                db.PlaylistHasTracks.Remove(item);
+            }
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        protected override void Dispose (bool disposing)
         {
-            if (disposing)
-            {
+            if (disposing) {
                 db.Dispose();
             }
             base.Dispose(disposing);

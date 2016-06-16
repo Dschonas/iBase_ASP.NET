@@ -54,20 +54,17 @@
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="TrackId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="PlaylistId" Type="Int32" />
-    <NavigationProperty Name="PlaylistTable" Relationship="Self.FK_PlaylistHasTracks" FromRole="PlaylistHasTracks" ToRole="PlaylistTable" />
-    <NavigationProperty Name="PlaylistTable1" Relationship="Self.FK_PlaylistId" FromRole="PlaylistHasTracks" ToRole="PlaylistTable" />
+    <NavigationProperty Name="PlaylistTable" Relationship="Self.FK_PlaylistId" FromRole="PlaylistHasTracks" ToRole="PlaylistTable" />
     <NavigationProperty Name="TrackTable" Relationship="Self.FK_TrackId" FromRole="PlaylistHasTracks" ToRole="TrackTable" />
   </EntityType>
   <EntityType Name="PlaylistTable">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="Int32" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="PlaylistHasTracks" Type="Int32" />
-    <NavigationProperty Name="PlaylistHasTracks1" Relationship="Self.FK_PlaylistHasTracks" FromRole="PlaylistTable" ToRole="PlaylistHasTracks" />
-    <NavigationProperty Name="PlaylistHasTracks2" Relationship="Self.FK_PlaylistId" FromRole="PlaylistTable" ToRole="PlaylistHasTracks" />
+    <NavigationProperty Name="PlaylistHasTracks" Relationship="Self.FK_PlaylistId" FromRole="PlaylistTable" ToRole="PlaylistHasTracks" />
     <NavigationProperty Name="UserTable" Relationship="Self.FK_UserID" FromRole="PlaylistTable" ToRole="UserTable" />
   </EntityType>
   <EntityType Name="TrackHasArtists">
@@ -206,18 +203,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PlaylistHasTracks">
-    <End Role="PlaylistHasTracks" Type="Self.PlaylistHasTracks" Multiplicity="0..1" />
-    <End Role="PlaylistTable" Type="Self.PlaylistTable" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PlaylistHasTracks">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PlaylistTable">
-        <PropertyRef Name="PlaylistHasTracks" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_PlaylistId">
     <End Role="PlaylistTable" Type="Self.PlaylistTable" Multiplicity="0..1" />
     <End Role="PlaylistHasTracks" Type="Self.PlaylistHasTracks" Multiplicity="*" />
@@ -316,10 +301,6 @@
     <AssociationSet Name="FK_TrackHasArtist_ArtistId" Association="Self.FK_TrackHasArtist_ArtistId">
       <End Role="ArtistTable" EntitySet="ArtistTable" />
       <End Role="TracksHasArtist" EntitySet="TracksHasArtist" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PlaylistHasTracks" Association="Self.FK_PlaylistHasTracks">
-      <End Role="PlaylistHasTracks" EntitySet="PlaylistHasTracks" />
-      <End Role="PlaylistTable" EntitySet="PlaylistTable" />
     </AssociationSet>
     <AssociationSet Name="FK_PlaylistId" Association="Self.FK_PlaylistId">
       <End Role="PlaylistTable" EntitySet="PlaylistTable" />

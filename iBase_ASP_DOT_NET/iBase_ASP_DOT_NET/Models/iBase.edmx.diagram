@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5c862b882b484dbfaefbf235f5fe3d5b" Name="Diagram1">
-        <EntityTypeShape EntityType="iBaseModel.AlbumHasArtists" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBaseModel.AlbumHasTracks" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBaseModel.AlbumTable" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBaseModel.ArtistTable" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBaseModel.PlaylistHasTracks" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBaseModel.PlaylistTable" Width="1.5" PointX="10.5" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBaseModel.TrackHasArtists" Width="1.5" PointX="8.25" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBaseModel.TracksHasArtist" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBaseModel.TrackTable" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="iBaseModel.UserTable" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
+      <Diagram DiagramId="011befc3ce3648b9b68ff6b7bb8d4825" Name="Diagram1">
+        <EntityTypeShape EntityType="iBaseModel.AlbumHasArtists" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBaseModel.AlbumHasTracks" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBaseModel.AlbumTable" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBaseModel.ArtistTable" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBaseModel.PlaylistHasTracks" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBaseModel.PlaylistTable" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBaseModel.TrackHasArtists" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBaseModel.TracksHasArtist" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBaseModel.TrackTable" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="iBaseModel.UserTable" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="iBaseModel.FK_AlbumHasArtist_Album" ManuallyRouted="false" />
         <AssociationConnector Association="iBaseModel.FK_AlbumHasArtist_Artist" ManuallyRouted="false" />
         <AssociationConnector Association="iBaseModel.FK_AlbumHasTracks_Album" ManuallyRouted="false" />
@@ -22,7 +22,6 @@
         <AssociationConnector Association="iBaseModel.FK_Artists" ManuallyRouted="false" />
         <AssociationConnector Association="iBaseModel.FK_TrackHasArtist_Artist" ManuallyRouted="false" />
         <AssociationConnector Association="iBaseModel.FK_TrackHasArtist_ArtistId" ManuallyRouted="false" />
-        <AssociationConnector Association="iBaseModel.FK_PlaylistHasTracks" ManuallyRouted="false" />
         <AssociationConnector Association="iBaseModel.FK_PlaylistId" ManuallyRouted="false" />
         <AssociationConnector Association="iBaseModel.FK_TrackId" ManuallyRouted="false" />
         <AssociationConnector Association="iBaseModel.FK_UserID" ManuallyRouted="false" />

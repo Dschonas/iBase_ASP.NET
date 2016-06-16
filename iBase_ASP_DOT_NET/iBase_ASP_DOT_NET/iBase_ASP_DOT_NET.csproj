@@ -171,6 +171,7 @@
     <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlaylistController.cs" />
+    <Compile Include="Controllers\PlaylistTrackController.cs" />
     <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -313,11 +314,6 @@
     <Content Include="Views\Artist\Details.cshtml" />
     <Content Include="Views\Artist\Edit.cshtml" />
     <Content Include="Views\Artist\Index.cshtml" />
-    <Content Include="Views\Playlist\Create.cshtml" />
-    <Content Include="Views\Playlist\Delete.cshtml" />
-    <Content Include="Views\Playlist\Details.cshtml" />
-    <Content Include="Views\Playlist\Edit.cshtml" />
-    <Content Include="Views\Playlist\Index.cshtml" />
     <Content Include="Views\Track\Create.cshtml" />
     <Content Include="Views\Track\Delete.cshtml" />
     <Content Include="Views\Track\Details.cshtml" />
@@ -328,6 +324,17 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Track\Add.cshtml" />
+    <Content Include="Views\PlaylistTrack\Create.cshtml" />
+    <Content Include="Views\PlaylistTrack\Delete.cshtml" />
+    <Content Include="Views\PlaylistTrack\Details.cshtml" />
+    <Content Include="Views\PlaylistTrack\Edit.cshtml" />
+    <Content Include="Views\PlaylistTrack\Index.cshtml" />
+    <Content Include="Views\Playlist\Create.cshtml" />
+    <Content Include="Views\Playlist\Delete.cshtml" />
+    <Content Include="Views\Playlist\Details.cshtml" />
+    <Content Include="Views\Playlist\Edit.cshtml" />
+    <Content Include="Views\Playlist\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

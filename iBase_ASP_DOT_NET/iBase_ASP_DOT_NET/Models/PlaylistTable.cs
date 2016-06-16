@@ -17,17 +17,15 @@ namespace iBase_ASP_DOT_NET.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PlaylistTable()
         {
-            this.PlaylistHasTracks2 = new HashSet<PlaylistHasTracks>();
+            this.PlaylistHasTracks = new HashSet<PlaylistHasTracks>();
         }
     
         public int Id { get; set; }
         public Nullable<int> UserId { get; set; }
         public string Name { get; set; }
-        public Nullable<int> PlaylistHasTracks { get; set; }
     
-        public virtual PlaylistHasTracks PlaylistHasTracks1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlaylistHasTracks> PlaylistHasTracks2 { get; set; }
+        public virtual ICollection<PlaylistHasTracks> PlaylistHasTracks { get; set; }
         public virtual UserTable UserTable { get; set; }
     }
 }

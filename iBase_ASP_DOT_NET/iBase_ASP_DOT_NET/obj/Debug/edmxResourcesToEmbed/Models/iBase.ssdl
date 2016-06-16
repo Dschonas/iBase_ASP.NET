@@ -49,10 +49,9 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="UserId" Type="int" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
-    <Property Name="PlaylistHasTracks" Type="int" />
   </EntityType>
   <EntityType Name="TrackHasArtists">
     <Key>
@@ -153,18 +152,6 @@
       </Principal>
       <Dependent Role="TrackTable">
         <PropertyRef Name="ArtistID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PlaylistHasTracks">
-    <End Role="PlaylistHasTracks" Type="Self.PlaylistHasTracks" Multiplicity="0..1" />
-    <End Role="PlaylistTable" Type="Self.PlaylistTable" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PlaylistHasTracks">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PlaylistTable">
-        <PropertyRef Name="PlaylistHasTracks" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -282,10 +269,6 @@
     <AssociationSet Name="FK_Artists" Association="Self.FK_Artists">
       <End Role="ArtistTable" EntitySet="ArtistTable" />
       <End Role="TrackTable" EntitySet="TrackTable" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PlaylistHasTracks" Association="Self.FK_PlaylistHasTracks">
-      <End Role="PlaylistHasTracks" EntitySet="PlaylistHasTracks" />
-      <End Role="PlaylistTable" EntitySet="PlaylistTable" />
     </AssociationSet>
     <AssociationSet Name="FK_PlaylistId" Association="Self.FK_PlaylistId">
       <End Role="PlaylistTable" EntitySet="PlaylistTable" />

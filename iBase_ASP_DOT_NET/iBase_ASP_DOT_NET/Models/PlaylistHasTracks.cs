@@ -14,19 +14,11 @@ namespace iBase_ASP_DOT_NET.Models
     
     public partial class PlaylistHasTracks
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PlaylistHasTracks()
-        {
-            this.PlaylistTable = new HashSet<PlaylistTable>();
-        }
-    
         public int Id { get; set; }
         public string TrackId { get; set; }
         public Nullable<int> PlaylistId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlaylistTable> PlaylistTable { get; set; }
-        public virtual PlaylistTable PlaylistTable1 { get; set; }
+        public virtual PlaylistTable PlaylistTable { get; set; }
         public virtual TrackTable TrackTable { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using iBase_ASP_DOT_NET.Models;
 using PagedList;
+using System.Data.Entity.Infrastructure;
 
 namespace iBase_ASP_DOT_NET.Controllers
 {
@@ -16,7 +17,7 @@ namespace iBase_ASP_DOT_NET.Controllers
         private iBaseEntities db = new iBaseEntities();
 
         // GET: Track
-        public ActionResult Index(int? popularity, string searchString, string sortOrder,
+        public ActionResult Index (int? popularity, string searchString, string sortOrder,
                                     int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -57,26 +58,25 @@ namespace iBase_ASP_DOT_NET.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
+            ViewBag.playlist = new SelectList(db.PlaylistTable, "Id", "Name");
             return View(tracks.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Track/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details (string id)
         {
-            if (id == null)
-            {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TrackTable trackTable = db.TrackTable.Find(id);
-            if (trackTable == null)
-            {
+            if (trackTable == null) {
                 return HttpNotFound();
             }
             return View(trackTable);
         }
 
         // GET: Track/Create
-        public ActionResult Create()
+        public ActionResult Create ()
         {
             ViewBag.ArtistID = new SelectList(db.ArtistTable, "Id", "Name");
             return View();
@@ -87,10 +87,9 @@ namespace iBase_ASP_DOT_NET.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Album,DiscNumber,DurationMS,Explicity,Href,Popularity,ImageURL,PreviewURL,TrackNumber,Type,ArtistID")] TrackTable trackTable)
+        public ActionResult Create ([Bind(Include = "Id,Name,Album,DiscNumber,DurationMS,Explicity,Href,Popularity,ImageURL,PreviewURL,TrackNumber,Type,ArtistID")] TrackTable trackTable)
         {
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
                 db.TrackTable.Add(trackTable);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -101,15 +100,13 @@ namespace iBase_ASP_DOT_NET.Controllers
         }
 
         // GET: Track/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit (string id)
         {
-            if (id == null)
-            {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TrackTable trackTable = db.TrackTable.Find(id);
-            if (trackTable == null)
-            {
+            if (trackTable == null) {
                 return HttpNotFound();
             }
             ViewBag.ArtistID = new SelectList(db.ArtistTable, "Id", "Name", trackTable.ArtistID);
@@ -121,10 +118,9 @@ namespace iBase_ASP_DOT_NET.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Album,DiscNumber,DurationMS,Explicity,Href,Popularity,ImageURL,PreviewURL,TrackNumber,Type,ArtistID")] TrackTable trackTable)
+        public ActionResult Edit ([Bind(Include = "Id,Name,Album,DiscNumber,DurationMS,Explicity,Href,Popularity,ImageURL,PreviewURL,TrackNumber,Type,ArtistID")] TrackTable trackTable)
         {
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
                 db.Entry(trackTable).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -134,15 +130,13 @@ namespace iBase_ASP_DOT_NET.Controllers
         }
 
         // GET: Track/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete (string id)
         {
-            if (id == null)
-            {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             TrackTable trackTable = db.TrackTable.Find(id);
-            if (trackTable == null)
-            {
+            if (trackTable == null) {
                 return HttpNotFound();
             }
             return View(trackTable);
@@ -151,7 +145,7 @@ namespace iBase_ASP_DOT_NET.Controllers
         // POST: Track/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed (string id)
         {
             TrackTable trackTable = db.TrackTable.Find(id);
             db.TrackTable.Remove(trackTable);
@@ -159,13 +153,40 @@ namespace iBase_ASP_DOT_NET.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        protected override void Dispose (bool disposing)
         {
-            if (disposing)
-            {
+            if (disposing) {
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Add (string id)
+        {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TrackTable tracks = db.TrackTable.Find(id);
+            if (tracks == null) {
+                return HttpNotFound();
+            }
+
+            ViewBag.playlist = new SelectList(db.PlaylistTable, "Id", "Name");
+            return View(tracks);
+        }
+
+        [HttpPost, ActionName("Add")]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddConfirmed (string id)
+        {
+            var playhastrack = new PlaylistHasTracks();
+            playhastrack.Id = 5;
+            playhastrack.TrackId = id;
+            //playhastrack.PlaylistId = ;
+            db.PlaylistHasTracks.Add(playhastrack);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }
