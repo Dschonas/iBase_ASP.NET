@@ -18,6 +18,9 @@ namespace iBase_ASP_DOT_NET.Controllers
         public ActionResult Index ()
         {
             var playlists = db.PlaylistTable.Include(p => p.UserTable);
+            if (!string.IsNullOrEmpty(User.Identity.Name))
+                playlists = db.PlaylistTable.Where(p => p.UserTable.Username == User.Identity.Name);
+
             return View(playlists.ToList());
         }
 
