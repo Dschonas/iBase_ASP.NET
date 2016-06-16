@@ -177,12 +177,11 @@ namespace iBase_ASP_DOT_NET.Controllers
 
         [HttpPost, ActionName("Add")]
         [ValidateAntiForgeryToken]
-        public ActionResult AddConfirmed (string id)
+        public ActionResult AddConfirmed (string id, string playlist)
         {
             var playhastrack = new PlaylistHasTracks();
-            playhastrack.Id = 5;
             playhastrack.TrackId = id;
-            //playhastrack.PlaylistId = ;
+            playhastrack.PlaylistId = int.Parse(playlist);
             db.PlaylistHasTracks.Add(playhastrack);
             db.SaveChanges();
 

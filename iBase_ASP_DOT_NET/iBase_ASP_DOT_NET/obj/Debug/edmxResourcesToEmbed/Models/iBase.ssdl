@@ -41,7 +41,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="TrackId" Type="varchar" MaxLength="100" />
     <Property Name="PlaylistId" Type="int" />
   </EntityType>

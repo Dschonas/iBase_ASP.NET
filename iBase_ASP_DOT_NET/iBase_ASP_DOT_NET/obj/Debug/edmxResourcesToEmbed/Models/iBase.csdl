@@ -51,7 +51,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TrackId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="PlaylistId" Type="Int32" />
     <NavigationProperty Name="PlaylistTable" Relationship="Self.FK_PlaylistId" FromRole="PlaylistHasTracks" ToRole="PlaylistTable" />

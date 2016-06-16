@@ -4,6 +4,8 @@
 }
 <h2>Add</h2>
 <h3>Are you sure you want to add this?</h3>
+@using (Html.BeginForm())
+{
 <div class="form-group">
     <div class="col-md-10">
         @Html.DropDownList("playlist", null, htmlAttributes: new { @class = "form-control" })
@@ -85,11 +87,10 @@
             @Html.DisplayFor(model => model.ArtistTable.Name)
         </dd>
     </dl>
-    @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
         <div class="form-actions no-color">
             <input type="submit" value="Add" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
+
     }
-</div>
