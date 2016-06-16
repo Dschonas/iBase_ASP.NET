@@ -17,7 +17,13 @@ namespace iBase_ASP_DOT_NET.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return View(db.UserTable.ToList());
+            var users = from u in db.UserTable
+                        select u;
+            
+            if (!string.IsNullOrEmpty(User.Identity.Name))
+                users = db.UserTable.Where(u => u.Username == User.Identity.Name);
+
+            return View(users);
         }
 
         // GET: User/Details/5

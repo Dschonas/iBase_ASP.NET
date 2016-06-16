@@ -19,6 +19,9 @@ namespace iBase_ASP_DOT_NET.Controllers
         {
             var pht = db.PlaylistHasTracks.Include(p => p.PlaylistTable).Include(p => p.TrackTable);
 
+            if (!string.IsNullOrEmpty(User.Identity.Name))
+                pht = pht.Where(u => u.PlaylistTable.UserTable.Username == User.Identity.Name);
+
             if (playlist != null)
                 pht = pht.Where(p => p.PlaylistId == playlist);
 
