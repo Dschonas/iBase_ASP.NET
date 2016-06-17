@@ -212,3 +212,6 @@ div .edit {
 dd {
     margin: 0.5em;
 }
+.popularity-btn {
+    max-width: 200px !important;
+}

@@ -30,9 +30,6 @@
                new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            Image URL
-        </th>
-        <th>
             Link
         </th>
         <th>Interact</th>
@@ -43,9 +40,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageURL)
             </td>
             <td>
                 <a class="glyphicon glyphicon-new-window" aria-hidden="true" href="@Html.DisplayFor(modelItem => item.Href)"></a>

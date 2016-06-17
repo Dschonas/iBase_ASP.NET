@@ -4,21 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Tracks in your playlist</h2>
+<h2 style="margin-bottom: 1em;">Tracks in your playlist</h2>
 
 @using (Html.BeginForm("Index", "Track", FormMethod.Get))
 {
-    <div class="filterbox">
-        <input name="popularity" type="number" placeholder="Popularity bigger than" style="float: left" class="btn btn-default" />
-        <div class="form-horizontal">
-            <div class="input-group">
-                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Search by name ..." })
-                <span class="input-group-btn">
-                    <input type="submit" class="btn btn-secondary" value="Search" />
-                </span>
-            </div>
-        </div>
-    </div>
 }
 @foreach (var item in Model)
 {
@@ -56,7 +45,6 @@
                 <p><b>Artist:</b> @Html.DisplayFor(modelItem => item.TrackTable.ArtistTable.Name)</p>
                 <div class="edit" style="text-align: center">
                     <div style="display: inline-block;">
-                        <span class="btn-left glyphicon glyphicon-pencil" aria-hidden="true"></span>@Html.ActionLink("Edit", "Edit", new { id = item.Id })
                         <span class="btn-right glyphicon glyphicon-info-sign" aria-hidden="true"></span>@Html.ActionLink("Details", "Details", new { id = item.Id })
                         <span class="btn-right glyphicon glyphicon-remove" aria-hidden="true"></span>@Html.ActionLink("Remove", "Delete", new { id = item.Id })
                     </div>

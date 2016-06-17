@@ -13,9 +13,6 @@ namespace iBase_ASP_DOT_NET.Models
 
     public class MetadataArtist
     {
-        [Display(Name = "ID")]
-        [Required]
-        public string Id { get; set; }
 
         [Display(Name = "Name")]
         [Required]

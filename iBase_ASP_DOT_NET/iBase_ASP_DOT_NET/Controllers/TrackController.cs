@@ -89,7 +89,10 @@ namespace iBase_ASP_DOT_NET.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create ([Bind(Include = "Id,Name,Album,DiscNumber,DurationMS,Explicity,Href,Popularity,ImageURL,PreviewURL,TrackNumber,Type,ArtistID")] TrackTable trackTable)
         {
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
+                trackTable.Id = RandomString(16);
+                while (db.TrackTable.Any(x => x.Id == trackTable.Id)) trackTable.Id = RandomString(16);
                 db.TrackTable.Add(trackTable);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -171,7 +174,7 @@ namespace iBase_ASP_DOT_NET.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.playlist = new SelectList(db.PlaylistTable, "Id", "Name");
+            ViewBag.playlist = new SelectList(db.PlaylistTable.Where(p => p.UserTable.Username == User.Identity.Name), "Id", "Name");
             return View(tracks);
         }
 
@@ -186,6 +189,12 @@ namespace iBase_ASP_DOT_NET.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

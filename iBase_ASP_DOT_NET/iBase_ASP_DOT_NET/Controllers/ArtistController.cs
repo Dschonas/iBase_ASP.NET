@@ -20,8 +20,6 @@ namespace iBase_ASP_DOT_NET.Controllers
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.GenreSortParm = sortOrder == "Genre" ? "genre_desc" : "Genre";
-            ViewBag.TypeSortParm = sortOrder == "Type" ? "type_desc" : "Type";
             ViewBag.PopularitySortParm = sortOrder == "Popularity" ? "popularity_desc" : "Popularity";
 
             if (searchString != null) {
@@ -42,12 +40,6 @@ namespace iBase_ASP_DOT_NET.Controllers
             switch (sortOrder) {
                 case "name_desc":
                     artists = artists.OrderByDescending(a => a.Name);
-                    break;
-                case "genre_desc":
-                    artists = artists.OrderByDescending(a => a.Genre);
-                    break;
-                case "type_desc":
-                    artists = artists.OrderByDescending(a => a.Type);
                     break;
                 case "popularity_desc":
                     artists = artists.OrderByDescending(a => a.Popularity);
@@ -93,6 +85,8 @@ namespace iBase_ASP_DOT_NET.Controllers
         {
             if (ModelState.IsValid)
             {
+                artistTable.Id = RandomString(16);
+                while (db.ArtistTable.Any(x => x.Id == artistTable.Id)) artistTable.Id = RandomString(16);
                 db.ArtistTable.Add(artistTable);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -165,6 +159,13 @@ namespace iBase_ASP_DOT_NET.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

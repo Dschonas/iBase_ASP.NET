@@ -86,6 +86,8 @@ namespace iBase_ASP_DOT_NET.Controllers
         {
             if (ModelState.IsValid)
             {
+                albumTable.Id = RandomString(16);
+                while (db.AlbumTable.Any(x => x.Id == albumTable.Id)) albumTable.Id = RandomString(16);
                 db.AlbumTable.Add(albumTable);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -158,6 +160,12 @@ namespace iBase_ASP_DOT_NET.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

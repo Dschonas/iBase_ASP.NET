@@ -13,17 +13,9 @@ namespace iBase_ASP_DOT_NET.Models
 
     public class MetadataTrack
     {
-        [Display(Name = "ID")]
-        [Required]
-        public string Id { get; set; }
-
         [Display(Name = "Name")]
         [Required]
-        public string Name { get; set; }
-
-        [Display(Name = "Album")]
-        [Required]
-        public string Album { get; set; }
+        public string Name { get; set; }        
 
         [Display(Name = "Type")]
         [Required]
